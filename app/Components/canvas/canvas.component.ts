@@ -40,6 +40,19 @@ export class CanvasComponent implements OnInit {
     return false;
   }
 
-  @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {}
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    let isOneSelected = this.machines.some((m) => this.isMachineSelected(m.id));
+    if (!isOneSelected) return;
+
+    if (event.key !== 'Delete') return;
+
+    let machinToDelete = this.machines.find((m) =>
+      this.isMachineSelected(m.id)
+    );
+
+    if (!machinToDelete) return;
+
+    this.machines = this.machines.filter((m) => m.id !== machinToDelete?.id);
+  }
 }
