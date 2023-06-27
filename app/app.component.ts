@@ -25,11 +25,23 @@ export class AppComponent {
       selectedRecipe: machine.selectedRecipe,
     };
 
+    let idRecipes: Recipe[] = [];
     newMachine.recipes.forEach((r) => {
-      r.machineId = newMachine.id;
+      let newRecipe: Recipe = {
+        name: r.name,
+        machineName: r.machineName,
+        machineId: newMachine.id,
+        isAlternate: r.isAlternate,
+        input: r.input,
+        output: r.output,
+      };
+      idRecipes.push(newRecipe);
     });
 
-    console.table(newMachine.selectedRecipe);
+    newMachine.recipes = idRecipes;
+
+    this.selectedRecipe = null;
+    this.machines.push(newMachine);
     this.elementId = this.machines[this.machines.length - 1].id + 1;
   }
 
@@ -43,6 +55,5 @@ export class AppComponent {
 
   getSelectedRecipe(recipe: Recipe) {
     this.selectedRecipe = recipe;
-    console.table(this.selectedRecipe)
   }
 }

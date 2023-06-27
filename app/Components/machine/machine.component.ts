@@ -41,6 +41,8 @@ export class MachineComponent implements OnInit, OnChanges {
   }
 
   onClick() {
+    console.table(this.machine);
+    console.table(this.machine.recipes);
     this.selectMachineEvent.emit(this.machine);
   }
 }
