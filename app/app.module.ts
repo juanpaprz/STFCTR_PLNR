@@ -6,15 +6,17 @@ import { MachineComponent } from './Components/machine/machine.component';
 import { PropertiesComponent } from './Components/properties/properties.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { DataJsonService } from './Services/data-json.service';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @NgModule({
-  imports: [BrowserModule, MachineComponent],
+  imports: [BrowserModule, CdkDrag],
   providers: [DataJsonService],
   declarations: [
     AppComponent,
     SidebarComponent,
     CanvasComponent,
     PropertiesComponent,
+    MachineComponent,
   ],
   bootstrap: [AppComponent],
 })

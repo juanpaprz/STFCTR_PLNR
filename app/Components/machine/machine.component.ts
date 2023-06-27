@@ -1,4 +1,3 @@
-import { CdkDrag } from '@angular/cdk/drag-drop';
 import {
   Component,
   EventEmitter,
@@ -10,15 +9,11 @@ import {
 } from '@angular/core';
 import { Recipe } from '../../Entities/recipe.entity';
 import { Machine } from '../../Entities/machine.entity';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-machine',
   templateUrl: './machine.component.html',
   styleUrls: ['./machine.component.css'],
-  standalone: true,
-  imports: [CdkDrag, MatButtonModule, MatTooltipModule],
 })
 export class MachineComponent implements OnInit, OnChanges {
   @Output() selectMachineEvent = new EventEmitter<Machine>();
