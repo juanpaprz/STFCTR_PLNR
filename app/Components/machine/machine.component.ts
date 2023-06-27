@@ -1,11 +1,13 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnInit,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { Recipe } from '../../Entities/recipe.entity';
 import { Machine } from '../../Entities/machine.entity';
@@ -80,21 +82,5 @@ export class MachineComponent implements OnInit, OnChanges {
   inputConnectorClick(event: Event) {
     let button = event.target as HTMLElement;
     let rect = button.getBoundingClientRect();
-
-    const canvas = document.querySelector('#canvas') as HTMLCanvasElement;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx) return;
-
-    // set line stroke and line width
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 5;
-
-    // draw a red line
-    ctx.beginPath();
-    ctx.moveTo(500, 500);
-    ctx.lineTo(300, 500);
-    ctx.stroke();
   }
 }

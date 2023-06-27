@@ -1,10 +1,12 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   HostListener,
   Input,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { Machine } from '../../Entities/machine.entity';
 import { Element } from '../../Entities/element.entity';

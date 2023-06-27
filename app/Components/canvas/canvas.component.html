@@ -1,4 +1,4 @@
-<canvas id="canvas" #canvas class="canvas mt-2 position-relative">
+<div id="canvas" #canvas class="canvas mt-2 position-relative">
   <app-machine
     *ngFor="let machine of machines"
     [container]="canvas"
@@ -7,4 +7,4 @@
     [selectedRecipe]="selectedRecipe"
     (selectMachineEvent)="sendMachineSelected($event)"
   ></app-machine>
-</canvas>
+</div>
