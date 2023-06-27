@@ -1,0 +1,20 @@
+<header>
+  <nav class="navbar bg-body-secondary">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Navbar</span>
+    </div>
+  </nav>
+</header>
+<div class="container-fluid">
+  <main class="row">
+    <div class="col-3 bg-body-tertiary p-0">
+      <app-sidebar
+        (newMachineEvent)="addNewMachine($event)"
+        (newConnectorEvent)="addNewConnector($event)"
+      ></app-sidebar>
+    </div>
+    <div class="col-9">
+      <app-canvas [machines]="machines"></app-canvas>
+    </div>
+  </main>
+</div>

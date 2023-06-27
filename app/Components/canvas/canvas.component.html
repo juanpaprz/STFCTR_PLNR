@@ -1,0 +1,7 @@
+<div id="canvas" #canvas class="canvas mt-2 position-relative">
+  <app-machine
+    *ngFor="let machine of machines"
+    [container]="canvas"
+    [machine]="machine"
+  ></app-machine>
+</div>
