@@ -3,8 +3,10 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { Machine } from '../../Entities/machine.entity';
 import { Element } from '../../Entities/element.entity';
@@ -15,7 +17,7 @@ import { Recipe } from '../../Entities/recipe.entity';
   templateUrl: './canvas.component.html',
   styleUrls: ['./canvas.component.css'],
 })
-export class CanvasComponent implements OnInit {
+export class CanvasComponent implements OnInit, OnChanges {
   @Output() sendMachineEvent = new EventEmitter<Machine>();
 
   @Input() machines: Machine[] = [];
@@ -27,6 +29,10 @@ export class CanvasComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.machines)
+  }
 
   sendMachineSelected(machine: Machine) {
     this.sendMachineEvent.emit(machine);

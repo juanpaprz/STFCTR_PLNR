@@ -42,7 +42,7 @@ export class AppComponent {
 
     this.selectedRecipe = null;
     this.machines.push(newMachine);
-    this.elementId = this.machines[this.machines.length - 1].id + 1;
+    this.elementId++;
   }
 
   addNewConnector(connector: Element) {
