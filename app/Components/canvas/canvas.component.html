@@ -3,6 +3,7 @@
     *ngFor="let machine of machines"
     [container]="canvas"
     [machine]="machine"
+    [isSelected]="isMachineSelected(machine.id)"
     [selectedRecipe]="selectedRecipe"
     (selectMachineEvent)="sendMachineSelected($event)"
   ></app-machine>

@@ -2,11 +2,15 @@
   class="position-absolute top-0 start-0"
   [cdkDragBoundary]="container"
   cdkDrag
+  id="machine-container"
 >
-  <div id="machine-container" class="card rounded-pill">
+  <div
+    class="card rounded-pill selected-element"
+    [ngClass]="setSelectedClass()"
+  >
     <div class="position-relative p-3">
       <button class="btn tooltip-hover" (click)="onClick()">
-        {{ machine.name }} {{ machine.id }}
+        {{ machine.name }}
       </button>
     </div>
   </div>

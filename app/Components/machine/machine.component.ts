@@ -28,6 +28,7 @@ export class MachineComponent implements OnInit, OnChanges {
     recipes: [],
     selectedRecipe: null,
   };
+  @Input() isSelected: boolean = false;
 
   constructor() {}
 
@@ -41,8 +42,14 @@ export class MachineComponent implements OnInit, OnChanges {
   }
 
   onClick() {
-    console.table(this.machine);
-    console.table(this.machine.recipes);
     this.selectMachineEvent.emit(this.machine);
+  }
+
+  setSelectedClass() {
+    if (this.isSelected)
+      return {
+        border: true,
+        'border-secondary': true,
+      };
   }
 }
