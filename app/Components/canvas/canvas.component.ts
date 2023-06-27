@@ -3,10 +3,8 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { Machine } from '../../Entities/machine.entity';
 import { Element } from '../../Entities/element.entity';
@@ -17,8 +15,9 @@ import { Recipe } from '../../Entities/recipe.entity';
   templateUrl: './canvas.component.html',
   styleUrls: ['./canvas.component.css'],
 })
-export class CanvasComponent implements OnInit, OnChanges {
+export class CanvasComponent implements OnInit {
   @Output() sendMachineEvent = new EventEmitter<Machine>();
+  @Output() deleteMachineEvent = new EventEmitter<Machine>();
 
   @Input() machines: Machine[] = [];
   @Input() connectors: Element[] = [];
@@ -29,10 +28,6 @@ export class CanvasComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit() {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.machines)
-  }
 
   sendMachineSelected(machine: Machine) {
     this.sendMachineEvent.emit(machine);
@@ -53,12 +48,13 @@ export class CanvasComponent implements OnInit, OnChanges {
 
     if (event.key !== 'Delete') return;
 
-    let machinToDelete = this.machines.find((m) =>
+    let machineToDelete = this.machines.find((m) =>
       this.isMachineSelected(m.id)
     );
 
-    if (!machinToDelete) return;
+    if (!machineToDelete) return;
 
-    this.machines = this.machines.filter((m) => m.id !== machinToDelete?.id);
+    this.sendMachineEvent.emit(undefined);
+    this.deleteMachineEvent.emit(machineToDelete);
   }
 }

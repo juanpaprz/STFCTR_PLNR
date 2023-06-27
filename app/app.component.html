@@ -20,6 +20,7 @@
         [machines]="machines"
         [selectedRecipe]="selectedRecipe"
         (sendMachineEvent)="getMachineSelected($event)"
+        (deleteMachineEvent)="deleteMachine($event)"
       ></app-canvas>
     </div>
   </main>

@@ -13,3 +13,53 @@
 #machine-container:hover .recipe-tooltip {
   visibility: visible;
 }
+
+.connectors {
+  visibility: hidden;
+}
+
+#machine-container:hover .connectors {
+  visibility: visible;
+}
+
+.connect-back-top {
+  position: absolute;
+  z-index: 1;
+  bottom: 82%;
+  left: 0%;
+}
+
+.connect-back-bottom {
+  position: absolute;
+  z-index: 1;
+  bottom: -7%;
+  left: 0%;
+}
+
+.connect-back-center {
+  position: absolute;
+  z-index: 1;
+  bottom: 37%;
+  left: -10%;
+}
+
+.connect-front-top {
+  position: absolute;
+  z-index: 1;
+  bottom: 82%;
+  left: 72%;
+}
+
+.connect-front-bottom {
+  position: absolute;
+  z-index: 1;
+  bottom: -7%;
+  left: 72%;
+}
+
+.connect-front-center {
+  position: absolute;
+  z-index: 1;
+  bottom: 37%;
+  left: 87%;
+}

@@ -4,14 +4,28 @@
   cdkDrag
   id="machine-container"
 >
-  <div
-    class="card rounded-pill selected-element"
-    [ngClass]="setSelectedClass()"
-  >
+  <div class="card rounded-pill" [ngClass]="setSelectedClass()">
     <div class="position-relative p-3">
       <button class="btn tooltip-hover" (click)="onClick()">
         {{ machine.name }}
       </button>
+      <div *ngIf="machine.selectedRecipe !== null">
+        <div *ngFor="let input of machine.selectedRecipe.input; let i = index">
+          <div class="connectors" [ngClass]="setInputsClass(i)">
+            <button
+              class="btn btn-secondary"
+              (click)="inputConnectorClick($event)"
+            ></button>
+          </div>
+        </div>
+        <div
+          *ngFor="let output of machine.selectedRecipe.output; let i = index"
+        >
+          <div class="connectors" [ngClass]="setOutputsClass(i)">
+            <button class="btn btn-secondary"></button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div

@@ -42,6 +42,7 @@ export class AppComponent {
 
     this.selectedRecipe = null;
     this.machines.push(newMachine);
+    console.table(this.machines);
     this.elementId++;
   }
 
@@ -55,5 +56,9 @@ export class AppComponent {
 
   getSelectedRecipe(recipe: Recipe) {
     this.selectedRecipe = recipe;
+  }
+
+  deleteMachine(machine: Machine) {
+    this.machines = this.machines.filter((m) => m.id != machine.id);
   }
 }
