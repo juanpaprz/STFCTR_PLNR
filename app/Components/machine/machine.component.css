@@ -1,25 +1,15 @@
-.example-menu {
-  display: inline-flex;
-  flex-direction: column;
-  min-width: 180px;
-  max-width: 280px;
-  background-color: rgb(0, 0, 0);
-  padding: 6px 0;
+.recipe-tooltip {
+  visibility: hidden;
+  text-align: center;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+  left: 50%;
+  margin-left: -50px;
 }
 
-.example-menu-item,
-.example-standalone-trigger {
-  background-color: transparent;
-  cursor: pointer;
-  border: none;
-
-  user-select: none;
-  min-width: 64px;
-  line-height: 36px;
-  padding: 0 16px;
-
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex: 1;
+.tooltip-hover:hover .recipe-tooltip {
+  visibility: visible;
 }

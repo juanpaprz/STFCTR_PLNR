@@ -1,17 +1,34 @@
 <div
-  class="card position-absolute top-0 start-0"
+  class="position-absolute top-0 start-0"
   [cdkDragBoundary]="container"
   cdkDrag
 >
-  <div class="card-body position-relative">
-    <button class="btn" (click)="onClick()">
-      {{ machine.name }}
-    </button>
-    <div
-      class="position-absolute top-0 start-100 translate-middle"
-      *ngIf="machine.selectedRecipe != null"
-    >
-      {{ machine.selectedRecipe.name }}
+  <div id="machine-container" class="card rounded-pill">
+    <div class="position-relative p-3">
+      <button class="btn tooltip-hover" (click)="onClick()">
+        {{ machine.name }}
+      </button>
     </div>
+  </div>
+  <div
+    class="recipe-tooltip d-flex flex-nowrap"
+    *ngIf="machine.selectedRecipe != null"
+  >
+    <small
+      class="py-1 px-2 text-bg-secondary border border-secondary rounded-pill"
+      >{{ machine.selectedRecipe.name }}
+      <svg
+        width="1em"
+        height="1em"
+        viewBox="0 0 16 16"
+        class="position-absolute top-100 start-50 translate-middle"
+        fill="var(--bs-secondary)"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+        />
+      </svg>
+    </small>
   </div>
 </div>
