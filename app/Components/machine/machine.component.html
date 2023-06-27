@@ -4,6 +4,15 @@
   cdkDrag
 >
   <div class="card-body">
-    <button class="btn">{{ machine.name }}</button>
+    <button
+      class="btn"
+      (click)="onClick()"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      data-bs-custom-class="custom-tooltip"
+      data-bs-title="This top tooltip is themed via CSS variables."
+    >
+      {{ machine.name }}
+    </button>
   </div>
 </div>

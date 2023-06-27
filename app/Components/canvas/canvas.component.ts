@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Machine } from '../../Entities/machine.entity';
 import { Element } from '../../Entities/element.entity';
+import { Recipe } from '../../Entities/recipe.entity';
 
 @Component({
   selector: 'app-canvas',
@@ -12,6 +13,7 @@ export class CanvasComponent implements OnInit {
 
   @Input() machines: Machine[] = [];
   @Input() connectors: Element[] = [];
+  @Input() selectedRecipe: Recipe | null = null;
 
   constructor() {}
 

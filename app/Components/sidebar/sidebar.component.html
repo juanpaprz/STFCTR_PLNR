@@ -39,5 +39,8 @@
   </div>
 </div>
 <div class="h-50">
-  <app-properties [machine]="machineProperties"></app-properties>
+  <app-properties
+    [machine]="machineProperties"
+    (selectRecipeEvent)="sendSelectedRecipe($event)"
+  ></app-properties>
 </div>

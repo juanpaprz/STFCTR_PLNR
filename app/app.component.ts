@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Element } from './Entities/element.entity';
 import { Machine } from './Entities/machine.entity';
+import { Recipe } from './Entities/recipe.entity';
 
 @Component({
   selector: 'my-app',
@@ -12,6 +13,7 @@ export class AppComponent {
   connectors: Element[] = [];
 
   machineSelected: Machine | null = null;
+  selectedRecipe: Recipe | null = null;
 
   elementId: number = 0;
 
@@ -32,5 +34,9 @@ export class AppComponent {
 
   getMachineSelected(machine: Machine) {
     this.machineSelected = machine;
+  }
+
+  getSelectedRecipe(recipe: Recipe) {
+    this.selectedRecipe = recipe;
   }
 }

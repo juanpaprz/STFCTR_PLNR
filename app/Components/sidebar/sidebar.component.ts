@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataJsonService } from '../../Services/data-json.service';
 import { Element } from '../../Entities/element.entity';
 import { Machine } from '../../Entities/machine.entity';
+import { Recipe } from '../../Entities/recipe.entity';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,7 @@ import { Machine } from '../../Entities/machine.entity';
 export class SidebarComponent implements OnInit {
   @Output() newMachineEvent = new EventEmitter<Machine>();
   @Output() newConnectorEvent = new EventEmitter<Element>();
+  @Output() sendRecipeEvent = new EventEmitter<Recipe>();
 
   @Input() machineProperties: Machine | null = null;
 
@@ -42,5 +44,9 @@ export class SidebarComponent implements OnInit {
 
   setActiveClass(tabName: string) {
     return { active: tabName == this.tab };
+  }
+
+  sendSelectedRecipe(recipe: Recipe) {
+    this.sendRecipeEvent.emit(recipe);
   }
 }

@@ -1,10 +1,14 @@
 <div class="border-top py-1" *ngIf="machine != null">
-  <h6>Properties</h6>
+  <div class="d-flex justify-content-between">
+    <h6>Properties</h6>
+    <span>{{ machine.id }}</span>
+  </div>
   <div class="list-group list-group-flush">
     <button
       type="button"
       class="list-group-item list-group-item-action"
       *ngFor="let recipe of machine.recipes; let i = index"
+      (click)="selectRecipe(recipe)"
     >
       {{ recipe.name }}
     </button>

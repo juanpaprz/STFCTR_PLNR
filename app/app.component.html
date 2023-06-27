@@ -7,16 +7,18 @@
 </header>
 <div class="container-fluid">
   <main class="row">
-    <div class="col-3 bg-body-tertiary p-0">
+    <div class="col-3 p-1 sidebar">
       <app-sidebar
         [machineProperties]="machineSelected"
         (newMachineEvent)="addNewMachine($event)"
         (newConnectorEvent)="addNewConnector($event)"
+        (sendRecipeEvent)="getSelectedRecipe($event)"
       ></app-sidebar>
     </div>
-    <div class="col-9">
+    <div class="col-9 bg-body-tertiary">
       <app-canvas
         [machines]="machines"
+        [selectedRecipe]="selectedRecipe"
         (sendMachineEvent)="getMachineSelected($event)"
       ></app-canvas>
     </div>
