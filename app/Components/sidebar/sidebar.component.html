@@ -1,43 +1,41 @@
-<div class="my-2">
-  <div class="h-50 border border-info">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          (click)="changeTab('machines')"
-          [ngClass]="setActiveClass('machines')"
-          >Machines</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          (click)="changeTab('connectors')"
-          [ngClass]="setActiveClass('connectors')"
-          >Connectors</a
-        >
-      </li>
-    </ul>
-    <div class="list-group list-group-flush" *ngIf="tab == 'machines'">
-      <button
-        type="button"
-        class="list-group-item list-group-item-action"
-        *ngFor="let machine of machines; let i = index"
-        (click)="addNewMachine(i)"
+<div class="my-2 h-50">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        (click)="changeTab('machines')"
+        [ngClass]="setActiveClass('machines')"
+        >Machines</a
       >
-        {{ machine.name }}
-      </button>
-    </div>
-    <div class="list-group" *ngIf="tab == 'connectors'">
-      <button
-        type="button"
-        class="list-group-item list-group-item-action"
-        *ngFor="let connector of connectors; let i = index"
-        (click)="addNewConnector(i)"
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        (click)="changeTab('connectors')"
+        [ngClass]="setActiveClass('connectors')"
+        >Connectors</a
       >
-        {{ connector.name }}
-      </button>
-    </div>
+    </li>
+  </ul>
+  <div class="list-group list-group-flush" *ngIf="tab == 'machines'">
+    <button
+      type="button"
+      class="list-group-item list-group-item-action"
+      *ngFor="let machine of machines; let i = index"
+      (click)="addNewMachine(i)"
+    >
+      {{ machine.name }}
+    </button>
   </div>
-  <div class="h-50"></div>
+  <div class="list-group" *ngIf="tab == 'connectors'">
+    <button
+      type="button"
+      class="list-group-item list-group-item-action"
+      *ngFor="let connector of connectors; let i = index"
+      (click)="addNewConnector(i)"
+    >
+      {{ connector.name }}
+    </button>
+  </div>
 </div>
+<div class="h-50">Properties</div>
