@@ -3,16 +3,15 @@
   [cdkDragBoundary]="container"
   cdkDrag
 >
-  <div class="card-body">
-    <button
-      class="btn"
-      (click)="onClick()"
-      data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      data-bs-custom-class="custom-tooltip"
-      data-bs-title="This top tooltip is themed via CSS variables."
-    >
+  <div class="card-body position-relative">
+    <button class="btn" (click)="onClick()">
       {{ machine.name }}
     </button>
+    <div
+      class="position-absolute top-0 start-100 translate-middle"
+      *ngIf="machine.selectedRecipe != null"
+    >
+      {{ machine.selectedRecipe?.name }}
+    </div>
   </div>
 </div>
