@@ -1,5 +1,4 @@
 .recipe-tooltip {
-  visibility: hidden;
   text-align: center;
 
   /* Position the tooltip */
@@ -8,8 +7,4 @@
   bottom: 110%;
   left: 50%;
   margin-left: -50px;
-}
-
-.tooltip-hover:hover .recipe-tooltip {
-  visibility: visible;
 }
