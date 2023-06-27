@@ -26,7 +26,7 @@ export class MachineComponent implements OnInit, OnChanges {
     name: '',
     id: 0,
     recipes: [],
-    selectedRecipe: this.selectedRecipe,
+    selectedRecipe: null,
   };
 
   constructor() {}
@@ -34,7 +34,10 @@ export class MachineComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.machine.selectedRecipe = this.selectedRecipe;
+    if (this.selectedRecipe) {
+      if (this.machine.id == this.selectedRecipe.machineId)
+        this.machine.selectedRecipe = this.selectedRecipe;
+    }
   }
 
   onClick() {

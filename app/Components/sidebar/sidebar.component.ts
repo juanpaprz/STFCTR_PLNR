@@ -26,8 +26,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.machines = this.dataService.getMachines();
     this.connectors = this.dataService.getConnectors();
-
-    console.log(this.machines);
   }
 
   addNewMachine(index: number) {

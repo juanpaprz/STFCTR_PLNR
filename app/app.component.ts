@@ -24,7 +24,12 @@ export class AppComponent {
       recipes: machine.recipes,
       selectedRecipe: machine.selectedRecipe,
     };
-    this.machines.push(newMachine);
+
+    newMachine.recipes.forEach((r) => {
+      r.machineId = newMachine.id;
+    });
+
+    console.table(newMachine.selectedRecipe);
     this.elementId = this.machines[this.machines.length - 1].id + 1;
   }
 
@@ -38,5 +43,6 @@ export class AppComponent {
 
   getSelectedRecipe(recipe: Recipe) {
     this.selectedRecipe = recipe;
+    console.table(this.selectedRecipe)
   }
 }
