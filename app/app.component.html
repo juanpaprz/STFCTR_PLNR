@@ -9,12 +9,16 @@
   <main class="row">
     <div class="col-3 bg-body-tertiary p-0">
       <app-sidebar
+        [machineProperties]="machineSelected"
         (newMachineEvent)="addNewMachine($event)"
         (newConnectorEvent)="addNewConnector($event)"
       ></app-sidebar>
     </div>
     <div class="col-9">
-      <app-canvas [machines]="machines"></app-canvas>
+      <app-canvas
+        [machines]="machines"
+        (sendMachineEvent)="getMachineSelected($event)"
+      ></app-canvas>
     </div>
   </main>
 </div>

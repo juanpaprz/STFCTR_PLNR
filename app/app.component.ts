@@ -11,6 +11,8 @@ export class AppComponent {
   machines: Machine[] = [];
   connectors: Element[] = [];
 
+  machineSelected: Machine | null = null;
+
   elementId: number = 0;
 
   addNewMachine(machine: Machine) {
@@ -26,5 +28,9 @@ export class AppComponent {
 
   addNewConnector(connector: Element) {
     this.connectors.push(connector);
+  }
+
+  getMachineSelected(machine: Machine) {
+    this.machineSelected = machine;
   }
 }

@@ -1,5 +1,5 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Machine } from '../../Entities/machine.entity';
 
 @Component({
@@ -10,6 +10,8 @@ import { Machine } from '../../Entities/machine.entity';
   imports: [CdkDrag],
 })
 export class MachineComponent implements OnInit {
+  @Output() selectMachineEvent = new EventEmitter<Machine>();
+
   @Input() container: HTMLDivElement = <HTMLDivElement>(
     document.createElement('div')
   );
@@ -27,6 +29,7 @@ export class MachineComponent implements OnInit {
 
   onClick() {
     if (this.machine.selectedRecipe == null) {
+      this.selectMachineEvent.emit(this.machine);
     }
   }
 }

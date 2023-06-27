@@ -3,5 +3,6 @@
     *ngFor="let machine of machines"
     [container]="canvas"
     [machine]="machine"
+    (selectMachineEvent)="sendMachineSelected($event)"
   ></app-machine>
 </div>

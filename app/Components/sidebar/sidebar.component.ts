@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataJsonService } from '../../Services/data-json.service';
 import { Element } from '../../Entities/element.entity';
 import { Machine } from '../../Entities/machine.entity';
@@ -11,6 +11,8 @@ import { Machine } from '../../Entities/machine.entity';
 export class SidebarComponent implements OnInit {
   @Output() newMachineEvent = new EventEmitter<Machine>();
   @Output() newConnectorEvent = new EventEmitter<Element>();
+
+  @Input() machineProperties: Machine | null = null;
 
   machines: Machine[] = [];
   connectors: Element[] = [];
