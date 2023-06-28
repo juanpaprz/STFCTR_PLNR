@@ -1,3 +1,7 @@
+<app-connection-line
+  *ngFor="let connection of connections"
+  [connection]="connection"
+></app-connection-line>
 <header>
   <nav class="navbar bg-body-secondary">
     <div class="container-fluid">
@@ -15,15 +19,15 @@
         (sendRecipeEvent)="getSelectedRecipe($event)"
       ></app-sidebar>
     </div>
-    <div class="col-9 bg-body-tertiary">
+    <div class="col-9 bg-body-tertiary" #canvasContainer>
       <app-canvas
         [machines]="machines"
-        [connections]="connections"
         [selectedRecipe]="selectedRecipe"
         (sendMachineEvent)="getMachineSelected($event)"
         (deleteMachineEvent)="deleteMachine($event)"
         (sendInputConnectionEvent)="setInputConnection($event)"
         (sendOutputConnectionEvent)="setOutputConnection($event)"
+        (sendMovingElementEvent)="setNewElementPosition($event)"
       ></app-canvas>
     </div>
   </main>

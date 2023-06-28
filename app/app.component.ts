@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { CdkDragMove } from '@angular/cdk/drag-drop';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { DragMovement } from './Components/machine/machine.component';
 import { Connection } from './Entities/connection.entity';
 import { Element } from './Entities/element.entity';
 import { Machine } from './Entities/machine.entity';
@@ -10,6 +12,8 @@ import { Recipe } from './Entities/recipe.entity';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  @ViewChild('canvasContainer') canvasContainer: ElementRef = {} as ElementRef;
+
   machines: Machine[] = [];
   connectors: Element[] = [];
   connections: Connection[] = [];
@@ -87,10 +91,25 @@ export class AppComponent {
       outputY: this.connection.outputY,
     };
 
+    this.connection = {
+      elementIdInput: 0,
+      elementPortInput: 0,
+      inputX: 0,
+      inputY: 0,
+      elementIdOutput: 0,
+      elementPortOutput: 0,
+      outputX: 0,
+      outputY: 0,
+    };
     return newConnection;
   }
 
   setInputConnection(inputConnection: Connection) {
+    if (this.connection.elementIdInput != 0) this.startConnection = true;
+
+    if (this.connection.elementIdOutput == inputConnection.elementIdInput)
+      return;
+
     this.connection.elementIdInput = inputConnection.elementIdInput;
     this.connection.elementPortInput = inputConnection.elementPortInput;
     this.connection.inputX = inputConnection.inputX;
@@ -103,6 +122,11 @@ export class AppComponent {
   }
 
   setOutputConnection(outputConnection: Connection) {
+    if (this.connection.elementIdOutput != 0) this.startConnection = true;
+
+    if (this.connection.elementIdInput == outputConnection.elementIdOutput)
+      return;
+
     this.connection.elementIdOutput = outputConnection.elementIdOutput;
     this.connection.elementPortOutput = outputConnection.elementPortOutput;
     this.connection.outputX = outputConnection.outputX;
@@ -112,5 +136,20 @@ export class AppComponent {
       this.connections.push(this.createNewConnection());
 
     this.startConnection = !this.startConnection;
+  }
+
+  setNewElementPosition(event: DragMovement) {
+    let inputs = this.connections.filter((c) => c.elementIdInput == event.id);
+    let outputs = this.connections.filter((c) => c.elementIdOutput == event.id);
+
+    inputs.forEach((i) => {
+      i.inputX += event.x;
+      i.inputY += event.y;
+    });
+
+    outputs.forEach((o) => {
+      o.outputX += event.x;
+      o.outputY += event.y;
+    });
   }
 }

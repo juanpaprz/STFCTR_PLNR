@@ -12,6 +12,13 @@ import {
 import { Recipe } from '../../Entities/recipe.entity';
 import { Machine } from '../../Entities/machine.entity';
 import { Connection } from '../../Entities/connection.entity';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragEnd,
+  CdkDragMove,
+  CdkDragStart,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-machine',
@@ -22,6 +29,7 @@ export class MachineComponent implements OnInit, OnChanges {
   @Output() selectMachineEvent = new EventEmitter<Machine>();
   @Output() inputConnectionEvent = new EventEmitter<Connection>();
   @Output() outputConnectionEvent = new EventEmitter<Connection>();
+  @Output() movingElementEvent = new EventEmitter<DragMovement>();
 
   @Input() container: HTMLDivElement = <HTMLDivElement>(
     document.createElement('div')
@@ -117,4 +125,22 @@ export class MachineComponent implements OnInit, OnChanges {
 
     this.outputConnectionEvent.emit(outputConnection);
   }
+
+  dragEnded(event: CdkDragEnd<string[]>) {
+    if (this.machine.selectedRecipe !== null) {
+      console.log(event.distance);
+      let movement: DragMovement = {
+        x: event.distance.x,
+        y: event.distance.y,
+        id: this.machine.id,
+      };
+      this.movingElementEvent.emit(movement);
+    }
+  }
+}
+
+export class DragMovement {
+  x: number = 0;
+  y: number = 0;
+  id: number = 0;
 }

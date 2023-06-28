@@ -2,6 +2,7 @@
   class="position-absolute top-0 start-0"
   [cdkDragBoundary]="container"
   cdkDrag
+  (cdkDragEnded)="dragEnded($event)"
   id="machine-container"
 >
   <div class="card rounded-pill" [ngClass]="setSelectedClass()">

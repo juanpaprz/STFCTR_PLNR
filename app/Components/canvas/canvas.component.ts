@@ -4,34 +4,40 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { Machine } from '../../Entities/machine.entity';
 import { Element } from '../../Entities/element.entity';
 import { Recipe } from '../../Entities/recipe.entity';
 import { Connection } from '../../Entities/connection.entity';
+import { CdkDragMove } from '@angular/cdk/drag-drop';
+import { DragMovement } from '../../Components/machine/machine.component';
 
 @Component({
   selector: 'app-canvas',
   templateUrl: './canvas.component.html',
   styleUrls: ['./canvas.component.css'],
 })
-export class CanvasComponent implements OnInit {
+export class CanvasComponent implements OnInit, OnChanges {
   @Output() sendMachineEvent = new EventEmitter<Machine>();
   @Output() deleteMachineEvent = new EventEmitter<Machine>();
   @Output() sendInputConnectionEvent = new EventEmitter<Connection>();
   @Output() sendOutputConnectionEvent = new EventEmitter<Connection>();
+  @Output() sendMovingElementEvent = new EventEmitter<DragMovement>();
 
   @Input() machines: Machine[] = [];
   @Input() connectors: Element[] = [];
-  @Input() connections: Connection[] = [];
   @Input() selectedRecipe: Recipe | null = null;
 
   selectedMachineId: number | null = null;
 
   constructor() {}
+
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnInit() {}
 
@@ -70,5 +76,9 @@ export class CanvasComponent implements OnInit {
 
   sendOutputConnection(connection: Connection) {
     this.sendOutputConnectionEvent.emit(connection);
+  }
+
+  sendMovingElement(event: DragMovement) {
+    this.sendMovingElementEvent.emit(event);
   }
 }

@@ -1,4 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Renderer2,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Connection } from '../../Entities/connection.entity';
 
 @Component({
@@ -18,9 +27,28 @@ export class ConnectionLineComponent implements OnInit {
     outputY: 0,
   };
 
-  constructor() {}
+  @ViewChild('svgLine') svg: ElementRef = {} as ElementRef;
+
+  constructor(private rd: Renderer2) {}
 
   ngOnInit() {}
+
+  ngAfterViewInit() {
+    /*console.log(this.rd);
+    console.log(this.svg.nativeElement);
+
+    let x =
+      this.connection.inputX < this.connection.outputX
+        ? this.connection.inputX
+        : this.connection.outputX;
+    let y =
+      this.connection.inputY < this.connection.outputY
+        ? this.connection.inputY
+        : this.connection.outputY;
+
+    let transformAttr = ' translate(' + x + ',' + y + ')';
+    this.svg.nativeElement.setAttribute('transform', transformAttr);*/
+  }
 
   getLineWidth(connection: Connection): number {
     let a =
