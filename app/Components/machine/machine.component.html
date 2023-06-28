@@ -14,7 +14,7 @@
           <div class="connectors" [ngClass]="setInputsClass(i)">
             <button
               class="btn btn-secondary"
-              (click)="inputConnectorClick($event)"
+              (click)="inputConnectorClick($event, i)"
             ></button>
           </div>
         </div>
@@ -22,7 +22,10 @@
           *ngFor="let output of machine.selectedRecipe.output; let i = index"
         >
           <div class="connectors" [ngClass]="setOutputsClass(i)">
-            <button class="btn btn-secondary"></button>
+            <button
+              class="btn btn-secondary"
+              (click)="outputConnectorClick($event, i)"
+            ></button>
           </div>
         </div>
       </div>

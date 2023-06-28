@@ -18,9 +18,12 @@
     <div class="col-9 bg-body-tertiary">
       <app-canvas
         [machines]="machines"
+        [connections]="connections"
         [selectedRecipe]="selectedRecipe"
         (sendMachineEvent)="getMachineSelected($event)"
         (deleteMachineEvent)="deleteMachine($event)"
+        (sendInputConnectionEvent)="setInputConnection($event)"
+        (sendOutputConnectionEvent)="setOutputConnection($event)"
       ></app-canvas>
     </div>
   </main>

@@ -3,8 +3,8 @@ export class Connection {
   elementPortInput: number = 0;
   inputX: number = 0;
   inputY: number = 0;
-  elementPortOutpu: number = 0;
+  elementIdOutput: number = 0;
   elementPortOutput: number = 0;
   outputX: number = 0;
-  OutputY: number = 0;
+  outputY: number = 0;
 }

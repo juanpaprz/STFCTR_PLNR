@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { Recipe } from '../../Entities/recipe.entity';
 import { Machine } from '../../Entities/machine.entity';
+import { Connection } from '../../Entities/connection.entity';
 
 @Component({
   selector: 'app-machine',
@@ -19,6 +20,8 @@ import { Machine } from '../../Entities/machine.entity';
 })
 export class MachineComponent implements OnInit, OnChanges {
   @Output() selectMachineEvent = new EventEmitter<Machine>();
+  @Output() inputConnectionEvent = new EventEmitter<Connection>();
+  @Output() outputConnectionEvent = new EventEmitter<Connection>();
 
   @Input() container: HTMLDivElement = <HTMLDivElement>(
     document.createElement('div')
@@ -79,8 +82,39 @@ export class MachineComponent implements OnInit, OnChanges {
     };
   }
 
-  inputConnectorClick(event: Event) {
+  inputConnectorClick(event: Event, index: number) {
     let button = event.target as HTMLElement;
     let rect = button.getBoundingClientRect();
+
+    let inputConnection: Connection = {
+      elementIdInput: this.machine.id,
+      elementPortInput: index,
+      inputX: rect.x,
+      inputY: rect.y,
+      elementIdOutput: 0,
+      elementPortOutput: 0,
+      outputX: 0,
+      outputY: 0,
+    };
+
+    this.inputConnectionEvent.emit(inputConnection);
+  }
+
+  outputConnectorClick(event: Event, index: number) {
+    let button = event.target as HTMLElement;
+    let rect = button.getBoundingClientRect();
+
+    let outputConnection: Connection = {
+      elementIdInput: 0,
+      elementPortInput: 0,
+      inputX: 0,
+      inputY: 0,
+      elementIdOutput: this.machine.id,
+      elementPortOutput: index,
+      outputX: rect.x,
+      outputY: rect.y,
+    };
+
+    this.outputConnectionEvent.emit(outputConnection);
   }
 }
