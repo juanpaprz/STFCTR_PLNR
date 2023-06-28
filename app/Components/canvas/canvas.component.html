@@ -9,18 +9,4 @@
     (inputConnectionEvent)="sendInputConnection($event)"
     (outputConnectionEvent)="sendOutputConnection($event)"
   ></app-machine>
-  <svg
-    *ngFor="let connection of connections"
-    style="position: absolute"
-    [attr.width]="getLineWidth(connection)"
-    [attr.height]="getLineHeight(connection)"
-  >
-    <line
-      [attr.x1]="connection.inputX"
-      [attr.y1]="connection.inputY"
-      [attr.x2]="connection.outputX"
-      [attr.y2]="connection.outputY"
-      stroke="black"
-    />
-  </svg>
 </div>

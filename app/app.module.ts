@@ -7,6 +7,7 @@ import { PropertiesComponent } from './Components/properties/properties.componen
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { DataJsonService } from './Services/data-json.service';
 import { CdkDrag } from '@angular/cdk/drag-drop';
+import { ConnectionLineComponent } from './Components/connection-line/connection-line.component';
 
 @NgModule({
   imports: [BrowserModule, CdkDrag],
@@ -17,6 +18,7 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
     CanvasComponent,
     PropertiesComponent,
     MachineComponent,
+    ConnectionLineComponent,
   ],
   bootstrap: [AppComponent],
 })

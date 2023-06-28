@@ -33,20 +33,7 @@ export class CanvasComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    this.connections = [
-      {
-        elementIdInput: 0,
-        elementPortInput: 0,
-        inputX: 50,
-        inputY: 58,
-        elementIdOutput: 0,
-        elementPortOutput: 0,
-        outputX: 100,
-        outputY: 100,
-      },
-    ];
-  }
+  ngOnInit() {}
 
   sendMachineSelected(machine: Machine) {
     this.sendMachineEvent.emit(machine);
@@ -83,33 +70,5 @@ export class CanvasComponent implements OnInit {
 
   sendOutputConnection(connection: Connection) {
     this.sendOutputConnectionEvent.emit(connection);
-  }
-
-  getLineWidth(connection: Connection): number {
-    let a =
-      connection.inputX > connection.outputX
-        ? connection.inputX
-        : connection.outputX;
-    let b =
-      connection.inputX > connection.outputX
-        ? connection.outputX
-        : connection.inputX;
-
-    console.log(a - b);
-
-    return Math.round(a - b);
-  }
-
-  getLineHeight(connection: Connection): number {
-    let a =
-      connection.inputY > connection.outputY
-        ? connection.inputY
-        : connection.outputY;
-    let b =
-      connection.inputY > connection.outputY
-        ? connection.outputY
-        : connection.inputY;
-
-    return Math.round(a - b);
   }
 }
