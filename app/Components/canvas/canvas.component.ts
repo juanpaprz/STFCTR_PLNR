@@ -23,23 +23,37 @@ import { DragMovement } from '../../Components/machine/machine.component';
   styleUrls: ['./canvas.component.css'],
 })
 export class CanvasComponent implements OnInit, OnChanges {
+  @ViewChild('canvasContainer') canvasContainer: ElementRef = {} as ElementRef;
+
   @Output() sendMachineEvent = new EventEmitter<Machine>();
   @Output() deleteMachineEvent = new EventEmitter<Machine>();
   @Output() sendInputConnectionEvent = new EventEmitter<Connection>();
   @Output() sendOutputConnectionEvent = new EventEmitter<Connection>();
   @Output() sendMovingElementEvent = new EventEmitter<DragMovement>();
+  @Output() sendCanvasPositionEvent = new EventEmitter<number[]>();
 
   @Input() machines: Machine[] = [];
   @Input() connectors: Element[] = [];
   @Input() selectedRecipe: Recipe | null = null;
 
   selectedMachineId: number | null = null;
+  canvasPosition: number[] = [];
 
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnInit() {}
+
+  ngAfterViewInit() {
+    let canvasHtml = this.canvasContainer.nativeElement as HTMLElement;
+    let rect = canvasHtml.getBoundingClientRect();
+
+    this.canvasPosition.push(Math.round(rect.x));
+    this.canvasPosition.push(Math.round(rect.y));
+
+    this.sendCanvasPositionEvent.emit(this.canvasPosition);
+  }
 
   sendMachineSelected(machine: Machine) {
     this.sendMachineEvent.emit(machine);

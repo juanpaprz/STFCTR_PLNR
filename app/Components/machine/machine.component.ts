@@ -97,8 +97,8 @@ export class MachineComponent implements OnInit, OnChanges {
     let inputConnection: Connection = {
       elementIdInput: this.machine.id,
       elementPortInput: index,
-      inputX: Math.round(rect.x),
-      inputY: Math.round(rect.y),
+      inputX: Math.round(rect.right),
+      inputY: Math.round(rect.y + (rect.bottom - rect.y) / 2),
       elementIdOutput: 0,
       elementPortOutput: 0,
       outputX: 0,
@@ -120,7 +120,7 @@ export class MachineComponent implements OnInit, OnChanges {
       elementIdOutput: this.machine.id,
       elementPortOutput: index,
       outputX: Math.round(rect.x),
-      outputY: Math.round(rect.y),
+      outputY: Math.round(rect.y + (rect.bottom - rect.y) / 2),
     };
 
     this.outputConnectionEvent.emit(outputConnection);

@@ -1,5 +1,5 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DragMovement } from './Components/machine/machine.component';
 import { Connection } from './Entities/connection.entity';
 import { Element } from './Entities/element.entity';
@@ -11,7 +11,7 @@ import { Recipe } from './Entities/recipe.entity';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('canvasContainer') canvasContainer: ElementRef = {} as ElementRef;
 
   machines: Machine[] = [];
@@ -34,6 +34,17 @@ export class AppComponent {
 
   elementId: number = 1;
   startConnection: boolean = true;
+  canvasContainerX: number = 0;
+  canvasContainerY: number = 0;
+
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {}
+
+  setCanvasPosition(position: number[]) {
+    this.canvasContainerX = position[0];
+    this.canvasContainerY = position[1];
+  }
 
   addNewMachine(machine: Machine) {
     let newMachine: Machine = {
@@ -145,6 +156,9 @@ export class AppComponent {
     inputs.forEach((i) => {
       i.inputX += event.x;
       i.inputY += event.y;
+
+      if (i.inputX < this.canvasContainerX) i.inputX = this.canvasContainerX;
+      if (i.inputY < this.canvasContainerY) i.inputY = this.canvasContainerY;
     });
 
     outputs.forEach((o) => {
