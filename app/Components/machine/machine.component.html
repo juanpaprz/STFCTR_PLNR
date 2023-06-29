@@ -7,35 +7,31 @@
   #machineContainer
 >
   <div class="card rounded-pill" [ngClass]="setSelectedClass()">
-    <div class="position-relative p-3">
+    <div class="position-relative p-3 d-flex text-nowrap">
       <button class="btn tooltip-hover" (click)="onClick()">
         {{ machine.name }}
       </button>
-      <div *ngIf="machine.selectedRecipe !== null">
-        <div *ngFor="let input of machine.selectedRecipe.input; let i = index">
-          <app-connection-button
-            [connectionType]="'input'"
-            [connectionIndex]="i"
-            [machine]="machine"
-            [containerX]="machineContainerX"
-            [containerY]="machineContainerY"
-            (createConnectionEvent)="sendConnection($event, 'input')"
-            (sendConnectorOffsetEvent)="setConnectorsOffset($event)"
-          ></app-connection-button>
-        </div>
-        <div
+      <div *ngIf="machine.selectedRecipe !== null" class="d-flex">
+        <app-connection-button
+          *ngFor="let input of machine.selectedRecipe.input; let i = index"
+          [connectionType]="'input'"
+          [connectionIndex]="i"
+          [machine]="machine"
+          [containerX]="machineContainerX"
+          [containerY]="machineContainerY"
+          (createConnectionEvent)="sendConnection($event, 'input')"
+          (sendConnectorOffsetEvent)="setConnectorsOffset($event)"
+        ></app-connection-button>
+        <app-connection-button
           *ngFor="let output of machine.selectedRecipe.output; let i = index"
-        >
-          <app-connection-button
-            [connectionType]="'output'"
-            [connectionIndex]="i"
-            [machine]="machine"
-            [containerX]="machineContainerX"
-            [containerY]="machineContainerY"
-            (createConnectionEvent)="sendConnection($event, 'output')"
-            (sendConnectorOffsetEvent)="setConnectorsOffset($event)"
-          ></app-connection-button>
-        </div>
+          [connectionType]="'output'"
+          [connectionIndex]="i"
+          [machine]="machine"
+          [containerX]="machineContainerX"
+          [containerY]="machineContainerY"
+          (createConnectionEvent)="sendConnection($event, 'output')"
+          (sendConnectorOffsetEvent)="setConnectorsOffset($event)"
+        ></app-connection-button>
       </div>
     </div>
   </div>

@@ -14,4 +14,9 @@
   visibility: visible;
 }
 
-
+.connect-back-top {
+  position: absolute;
+  z-index: 1;
+  bottom: 82%;
+  left: 0%;
+}

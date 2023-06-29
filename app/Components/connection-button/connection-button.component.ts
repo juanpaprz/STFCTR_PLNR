@@ -63,7 +63,7 @@ export class ConnectionButtonComponent implements OnInit, OnChanges {
     this.offsetX = this.originalPosX - this.containerX;
     this.offsetY = this.originalPosY - this.containerY;
 
-    console.log(rect.y, rect.bottom);
+    console.log(rect.x, rect.right);
 
     let connectorOffset: ConnectorOffset = {
       type: this.connectionType,
@@ -74,6 +74,8 @@ export class ConnectionButtonComponent implements OnInit, OnChanges {
 
     this.sendConnectorOffsetEvent.emit(connectorOffset);
   }
+
+  ngAfterViewChecked() {}
 
   ngOnChanges() {}
 
@@ -87,7 +89,7 @@ export class ConnectionButtonComponent implements OnInit, OnChanges {
 
   inputConnectorClick(button: HTMLElement, index: number) {
     let rect = button.getBoundingClientRect();
-    console.log(rect.y, rect.bottom);
+    console.log(rect.x, rect.right);
     let inputConnection: Connection = {
       elementIdInput: this.machine.id,
       elementPortInput: index,
@@ -104,7 +106,7 @@ export class ConnectionButtonComponent implements OnInit, OnChanges {
 
   outputConnectorClick(button: HTMLElement, index: number) {
     let rect = button.getBoundingClientRect();
-    console.log(rect.y, rect.bottom);
+    console.log(rect.x, rect.right);
     let outputConnection: Connection = {
       elementIdInput: 0,
       elementPortInput: 0,
