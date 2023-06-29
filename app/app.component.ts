@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
   ngAfterViewInit() {}
 
   setCanvasPosition(position: number[]) {
+    console.log(position);
     this.canvasContainerX = position[0];
     this.canvasContainerY = position[1];
   }
@@ -157,13 +158,42 @@ export class AppComponent implements OnInit {
       i.inputX += event.x;
       i.inputY += event.y;
 
-      if (i.inputX < this.canvasContainerX) i.inputX = this.canvasContainerX;
-      if (i.inputY < this.canvasContainerY) i.inputY = this.canvasContainerY;
+      let offsets = event.offsets.find(
+        (o) => o.index === i.elementPortInput && o.type === 'input'
+      );
+      if (!offsets) return;
+
+      console.log(offsets);
+
+      if (i.inputX < this.canvasContainerX)
+        i.inputX = this.canvasContainerX + offsets.offsetX;
+
+      let topLimit = this.canvasContainerY;
+      if (offsets.offsetY > 20) topLimit += offsets.offsetY;
+
+      if (i.inputY < topLimit)
+        i.inputY = this.canvasContainerY + offsets.offsetY;
     });
 
     outputs.forEach((o) => {
       o.outputX += event.x;
       o.outputY += event.y;
+
+      let offsets = event.offsets.find(
+        (of) => of.index === o.elementPortOutput && of.type === 'output'
+      );
+      if (!offsets) return;
+
+      console.log();
+
+      if (o.outputX < this.canvasContainerX + offsets.offsetX)
+        o.outputX = this.canvasContainerX + offsets.offsetX;
+
+      let topLimit = this.canvasContainerY;
+      if (offsets.offsetY > 20) topLimit += offsets.offsetY;
+
+      if (o.outputY < topLimit)
+        o.outputY = this.canvasContainerY + offsets.offsetY;
     });
   }
 }

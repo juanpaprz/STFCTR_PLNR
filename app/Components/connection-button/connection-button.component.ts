@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Connection } from '../../Entities/connection.entity';
 import { Machine } from '../../Entities/machine.entity';
 
@@ -7,11 +16,14 @@ import { Machine } from '../../Entities/machine.entity';
   templateUrl: './connection-button.component.html',
   styleUrls: ['./connection-button.component.css'],
 })
-export class ConnectionButtonComponent implements OnInit {
+export class ConnectionButtonComponent implements OnInit, OnChanges {
   @Output() createConnectionEvent = new EventEmitter<Connection>();
+  @Output() sendConnectorOffsetEvent = new EventEmitter<ConnectorOffset>();
 
   @Input() connectionType: string = '';
   @Input() connectionIndex: number = 0;
+  @Input() containerX: number = 0;
+  @Input() containerY: number = 0;
   @Input() machine: Machine = {
     name: '',
     id: 0,
@@ -19,20 +31,65 @@ export class ConnectionButtonComponent implements OnInit {
     selectedRecipe: null,
   };
 
+  originalPosX: number = 0;
+  originalPosY: number = 0;
+  offsetX: number = 0;
+  offsetY: number = 0;
+
+  @ViewChild('connectionButton') connectionButton: ElementRef =
+    {} as ElementRef;
+
   constructor() {}
 
   ngOnInit() {}
 
-  connectorClick(event: Event, index: number) {
-    if (this.connectionType === 'input') this.inputConnectorClick(event, index);
-    else if (this.connectionType === 'output')
-      this.outputConnectorClick(event, index);
-  }
-
-  inputConnectorClick(event: Event, index: number) {
-    let button = event.target as HTMLElement;
+  ngAfterViewInit() {
+    let button = this.connectionButton.nativeElement as HTMLElement;
     let rect = button.getBoundingClientRect();
 
+    switch (this.connectionType) {
+      case 'input':
+        this.originalPosX = Math.round(rect.right);
+        this.originalPosY = Math.round(rect.y + (rect.bottom - rect.y) / 2);
+        break;
+      case 'output':
+        this.originalPosX = Math.round(rect.x);
+        this.originalPosY = Math.round(rect.y + (rect.bottom - rect.y) / 2);
+        break;
+    }
+
+    this.offsetX = this.originalPosX - this.containerX;
+    this.offsetY = this.originalPosY - this.containerY;
+
+    console.log(rect.y, rect.bottom);
+
+    let connectorOffset: ConnectorOffset = {
+      type: this.connectionType,
+      index: this.connectionIndex,
+      offsetX: this.offsetX,
+      offsetY: this.offsetY,
+    };
+
+    this.sendConnectorOffsetEvent.emit(connectorOffset);
+  }
+
+  ngAfterViewChecked() {
+    console.log('hola');
+  }
+
+  ngOnChanges() {}
+
+  connectorClick(index: number) {
+    let button = this.connectionButton.nativeElement as HTMLElement;
+    if (this.connectionType === 'input')
+      this.inputConnectorClick(button, index);
+    else if (this.connectionType === 'output')
+      this.outputConnectorClick(button, index);
+  }
+
+  inputConnectorClick(button: HTMLElement, index: number) {
+    let rect = button.getBoundingClientRect();
+    console.log(rect.y, rect.bottom);
     let inputConnection: Connection = {
       elementIdInput: this.machine.id,
       elementPortInput: index,
@@ -47,10 +104,9 @@ export class ConnectionButtonComponent implements OnInit {
     this.createConnectionEvent.emit(inputConnection);
   }
 
-  outputConnectorClick(event: Event, index: number) {
-    let button = event.target as HTMLElement;
+  outputConnectorClick(button: HTMLElement, index: number) {
     let rect = button.getBoundingClientRect();
-
+    console.log(rect.y, rect.bottom);
     let outputConnection: Connection = {
       elementIdInput: 0,
       elementPortInput: 0,
@@ -93,4 +149,11 @@ export class ConnectionButtonComponent implements OnInit {
       'connect-front-bottom': outputAmount > 1 && index == outputAmount - 1,
     };
   }
+}
+
+export class ConnectorOffset {
+  type: string = '';
+  index: number = 0;
+  offsetX: number = 0;
+  offsetY: number = 0;
 }

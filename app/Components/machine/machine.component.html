@@ -4,6 +4,7 @@
   cdkDrag
   (cdkDragEnded)="dragEnded($event)"
   id="machine-container"
+  #machineContainer
 >
   <div class="card rounded-pill" [ngClass]="setSelectedClass()">
     <div class="position-relative p-3">
@@ -16,7 +17,10 @@
             [connectionType]="'input'"
             [connectionIndex]="i"
             [machine]="machine"
+            [containerX]="machineContainerX"
+            [containerY]="machineContainerY"
             (createConnectionEvent)="sendConnection($event, 'input')"
+            (sendConnectorOffsetEvent)="setConnectorsOffset($event)"
           ></app-connection-button>
         </div>
         <div
@@ -26,7 +30,10 @@
             [connectionType]="'output'"
             [connectionIndex]="i"
             [machine]="machine"
+            [containerX]="machineContainerX"
+            [containerY]="machineContainerY"
             (createConnectionEvent)="sendConnection($event, 'output')"
+            (sendConnectorOffsetEvent)="setConnectorsOffset($event)"
           ></app-connection-button>
         </div>
       </div>
