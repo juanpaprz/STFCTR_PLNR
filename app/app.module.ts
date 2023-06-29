@@ -8,6 +8,7 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { DataJsonService } from './Services/data-json.service';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { ConnectionLineComponent } from './Components/connection-line/connection-line.component';
+import { ConnectionButtonComponent } from './Components/connection-button/connection-button.component';
 
 @NgModule({
   imports: [BrowserModule, CdkDrag],
@@ -19,6 +20,7 @@ import { ConnectionLineComponent } from './Components/connection-line/connection
     PropertiesComponent,
     MachineComponent,
     ConnectionLineComponent,
+    ConnectionButtonComponent,
   ],
   bootstrap: [AppComponent],
 })

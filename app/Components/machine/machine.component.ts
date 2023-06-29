@@ -66,69 +66,13 @@ export class MachineComponent implements OnInit, OnChanges {
       };
   }
 
-  setInputsClass(index: number) {
-    if (!this.machine.selectedRecipe) return;
-    let inputAmount = this.machine.selectedRecipe.input.length;
-
-    return {
-      'connect-back-top': inputAmount > 1 && index == 0,
-      'connect-back-center':
-        inputAmount == 1 || (inputAmount > 2 && index == 1),
-      'connect-back-bottom': inputAmount > 1 && index == inputAmount - 1,
-    };
-  }
-
-  setOutputsClass(index: number) {
-    if (!this.machine.selectedRecipe) return;
-    let outputAmount = this.machine.selectedRecipe.output.length;
-
-    return {
-      'connect-front-top': outputAmount > 1 && index == 0,
-      'connect-front-center':
-        outputAmount == 1 || (outputAmount > 2 && index == 1),
-      'connect-front-bottom': outputAmount > 1 && index == outputAmount - 1,
-    };
-  }
-
-  inputConnectorClick(event: Event, index: number) {
-    let button = event.target as HTMLElement;
-    let rect = button.getBoundingClientRect();
-
-    let inputConnection: Connection = {
-      elementIdInput: this.machine.id,
-      elementPortInput: index,
-      inputX: Math.round(rect.right),
-      inputY: Math.round(rect.y + (rect.bottom - rect.y) / 2),
-      elementIdOutput: 0,
-      elementPortOutput: 0,
-      outputX: 0,
-      outputY: 0,
-    };
-
-    this.inputConnectionEvent.emit(inputConnection);
-  }
-
-  outputConnectorClick(event: Event, index: number) {
-    let button = event.target as HTMLElement;
-    let rect = button.getBoundingClientRect();
-
-    let outputConnection: Connection = {
-      elementIdInput: 0,
-      elementPortInput: 0,
-      inputX: 0,
-      inputY: 0,
-      elementIdOutput: this.machine.id,
-      elementPortOutput: index,
-      outputX: Math.round(rect.x),
-      outputY: Math.round(rect.y + (rect.bottom - rect.y) / 2),
-    };
-
-    this.outputConnectionEvent.emit(outputConnection);
+  sendConnection(connection: Connection, type: string) {
+    if (type === 'input') this.inputConnectionEvent.emit(connection);
+    else if (type === 'output') this.outputConnectionEvent.emit(connection);
   }
 
   dragEnded(event: CdkDragEnd<string[]>) {
     if (this.machine.selectedRecipe !== null) {
-      console.log(event.distance);
       let movement: DragMovement = {
         x: event.distance.x,
         y: event.distance.y,

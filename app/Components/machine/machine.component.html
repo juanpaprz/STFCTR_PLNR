@@ -12,22 +12,22 @@
       </button>
       <div *ngIf="machine.selectedRecipe !== null">
         <div *ngFor="let input of machine.selectedRecipe.input; let i = index">
-          <div class="connectors" [ngClass]="setInputsClass(i)">
-            <button
-              class="btn btn-secondary"
-              (click)="inputConnectorClick($event, i)"
-            ></button>
-          </div>
+          <app-connection-button
+            [connectionType]="'input'"
+            [connectionIndex]="i"
+            [machine]="machine"
+            (createConnectionEvent)="sendConnection($event, 'input')"
+          ></app-connection-button>
         </div>
         <div
           *ngFor="let output of machine.selectedRecipe.output; let i = index"
         >
-          <div class="connectors" [ngClass]="setOutputsClass(i)">
-            <button
-              class="btn btn-secondary"
-              (click)="outputConnectorClick($event, i)"
-            ></button>
-          </div>
+          <app-connection-button
+            [connectionType]="'output'"
+            [connectionIndex]="i"
+            [machine]="machine"
+            (createConnectionEvent)="sendConnection($event, 'output')"
+          ></app-connection-button>
         </div>
       </div>
     </div>
