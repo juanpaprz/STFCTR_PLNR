@@ -73,10 +73,6 @@ export class ConnectionButtonComponent implements OnInit, OnChanges {
     this.sendConnectorOffsetEvent.emit(connectorOffset);
   }
 
-  ngAfterViewChecked() {
-    console.log('hola');
-  }
-
   ngOnChanges() {}
 
   connectorClick(index: number) {
