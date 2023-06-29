@@ -35,6 +35,14 @@ export const RESOURCERECIPES: ResourceRecipe[] = [
     amountMinute: 50,
   },
   {
+    recipeName: 'Iron Alloy Ingot',
+    type: 'output',
+    resourceName: 'Iron Ingot',
+    resource: { name: '' },
+    amount: 5,
+    amountMinute: 50,
+  },
+  {
     recipeName: 'Copper Alloy Ingot',
     type: 'input',
     resourceName: 'Copper Ore',

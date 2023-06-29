@@ -1,5 +1,6 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ConnectorOffset } from './Components/connection-button/connection-button.component';
 import { DragMovement } from './Components/machine/machine.component';
 import { Connection } from './Entities/connection.entity';
 import { Element } from './Entities/element.entity';
