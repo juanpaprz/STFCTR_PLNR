@@ -36,6 +36,8 @@ export class ConnectionButtonComponent implements OnInit, OnChanges {
   offsetX: number = 0;
   offsetY: number = 0;
 
+  justOne: number = 0;
+
   @ViewChild('connectionButton') connectionButton: ElementRef =
     {} as ElementRef;
 
