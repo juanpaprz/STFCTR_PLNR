@@ -2,10 +2,6 @@
   visibility: hidden;
 }
 
-#machine-container:hover .connectors {
-  visibility: visible;
-}
-
 .connect-back-top {
   position: absolute;
   z-index: 1;

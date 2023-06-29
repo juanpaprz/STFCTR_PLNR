@@ -13,3 +13,7 @@
 #machine-container:hover .recipe-tooltip {
   visibility: visible;
 }
+
+#machine-container:hover .connectors {
+  visibility: visible;
+}
