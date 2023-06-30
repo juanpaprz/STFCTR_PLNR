@@ -81,6 +81,11 @@ export class MachineComponent implements OnInit, OnChanges {
       };
   }
 
+  getConnectorsOffset(connectorOffset: ConnectorOffset) {
+    if (!this.machine.selectedRecipe) return
+    if (connectorOffset.type == 'output' && connectorOffset.index == this.machine.selectedRecipe.output.length - 1)
+  }
+
   setConnectorsOffset(connectorOffset: ConnectorOffset) {
     this.connectorsOffset = this.connectorsOffset.filter(
       (c) => c.index != connectorOffset.index || c.type !== connectorOffset.type

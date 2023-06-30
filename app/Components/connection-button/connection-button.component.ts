@@ -19,6 +19,7 @@ import { Machine } from '../../Entities/machine.entity';
 export class ConnectionButtonComponent implements OnInit, OnChanges {
   @Output() createConnectionEvent = new EventEmitter<Connection>();
   @Output() sendConnectorOffsetEvent = new EventEmitter<ConnectorOffset>();
+  @Output() notifyFinishedConnectorEvent = new EventEmitter<ConnectorOffset>();
 
   @Input() connectionType: string = '';
   @Input() connectionIndex: number = 0;
@@ -44,6 +45,17 @@ export class ConnectionButtonComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngAfterViewInit() {
+    let connectorOffset: ConnectorOffset = {
+      type: this.connectionType,
+      index: this.connectionIndex,
+      offsetX: this.offsetX,
+      offsetY: this.offsetY,
+    };
+
+    this.notifyFinishedConnectorEvent.emit(connectorOffset);
+  }
+
+  setOffsets() {
     let button = this.connectionButton.nativeElement as HTMLElement;
     let rect = button.getBoundingClientRect();
 
